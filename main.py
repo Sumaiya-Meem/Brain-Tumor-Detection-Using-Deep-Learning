@@ -10,7 +10,12 @@ import os
 app = Flask(__name__)
 
 # Load the trained model
-model = load_model('models/model.keras')
+# model = load_model('models/model.keras')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "model.keras")
+
+model = load_model(MODEL_PATH)
+
 
 # Class labels
 class_labels = ['glioma', 'meningioma', 'notumor', 'pituitary']
