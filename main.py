@@ -24,15 +24,13 @@ MODEL_PATH = os.path.join(BASE_DIR, "models", "model.keras")
 # Create models folder if it doesn't exist
 if not os.path.exists(os.path.dirname(MODEL_PATH)):
     os.makedirs(os.path.dirname(MODEL_PATH))
-
-# Download from Google Drive if it doesn't exist
-if not os.path.exists(MODEL_PATH):
-    url = "https://drive.google.com/uc?id=177FdyYGWcPt6QXLOQH3sDXGwx6Un7_pY"
+url = "https://drive.google.com/uc?id=177FdyYGWcPt6QXLOQH3sDXGwx6Un7_pY"
+if not os.path.exists(MODEL_PATH)
     gdown.download(url, MODEL_PATH, quiet=False)
 
 # Load the model
 model = load_model(MODEL_PATH)
-
+print("Model loaded successfully!")
 
 # Class labels
 class_labels = ['glioma', 'meningioma', 'notumor', 'pituitary']
