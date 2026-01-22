@@ -5,15 +5,32 @@ from keras.models import load_model
 from keras.utils import load_img, img_to_array
 import numpy as np
 import os
+import gdown
 
 # Initialize Flask app
 app = Flask(__name__)
 
 # Load the trained model
 # model = load_model('models/model.keras')
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# MODEL_PATH = os.path.join(BASE_DIR, "models", "model.keras")
+
+# model = load_model(MODEL_PATH)
+
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "models", "model.keras")
 
+# Create models folder if it doesn't exist
+if not os.path.exists(os.path.dirname(MODEL_PATH)):
+    os.makedirs(os.path.dirname(MODEL_PATH))
+
+# Download from Google Drive if it doesn't exist
+if not os.path.exists(MODEL_PATH):
+    url = "https://drive.google.com/file/d/177FdyYGWcPt6QXLOQH3sDXGwx6Un7_pY/view?usp=sharing"
+    gdown.download(url, MODEL_PATH, quiet=False)
+
+# Load the model
 model = load_model(MODEL_PATH)
 
 
