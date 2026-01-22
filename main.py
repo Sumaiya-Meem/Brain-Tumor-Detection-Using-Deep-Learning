@@ -27,7 +27,7 @@ if not os.path.exists(os.path.dirname(MODEL_PATH)):
 
 # Download from Google Drive if it doesn't exist
 if not os.path.exists(MODEL_PATH):
-    url = "https://drive.google.com/file/d/177FdyYGWcPt6QXLOQH3sDXGwx6Un7_pY/view?usp=sharing"
+    url = "https://drive.google.com/uc?id=177FdyYGWcPt6QXLOQH3sDXGwx6Un7_pY"
     gdown.download(url, MODEL_PATH, quiet=False)
 
 # Load the model
