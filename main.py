@@ -21,12 +21,21 @@ app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "models", "model.keras")
 
-# Create models folder if it doesn't exist
-if not os.path.exists(os.path.dirname(MODEL_PATH)):
-    os.makedirs(os.path.dirname(MODEL_PATH))
-url = "https://drive.google.com/uc?id=177FdyYGWcPt6QXLOQH3sDXGwx6Un7_pY"
+
+os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
+
+
+MODEL_DRIVE_ID = "177FdyYGWcPt6QXLOQH3sDXGwx6Un7_pY"
+url = f"https://drive.google.com/uc?id={MODEL_DRIVE_ID}"
+
+#  if model doesn't already exist
 if not os.path.exists(MODEL_PATH):
-    gdown.download(url, MODEL_PATH, quiet=False)
+    print("Downloading model from Google Drive...")
+    gdown.download(url, MODEL_PATH, quiet=False, fuzzy=True)
+
+# Verify the model file is there
+if not os.path.exists(MODEL_PATH):
+    raise FileNotFoundError(f"Model download failed for path: {MODEL_PATH}")
 
 # Load the model
 model = load_model(MODEL_PATH)
