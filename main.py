@@ -16,7 +16,9 @@ app = Flask(__name__)
 # MODEL_PATH = os.path.join(BASE_DIR, "models", "model.keras")
 
 # model = load_model(MODEL_PATH)
-
+import os
+import gdown
+from keras.models import load_model
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "models", "model.keras")
@@ -24,22 +26,22 @@ MODEL_PATH = os.path.join(BASE_DIR, "models", "model.keras")
 
 os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
 
+url = "https://drive.google.com/uc?id=177FdyYGWcPt6QXLOQH3sDXGwx6Un7_pY"
 
-MODEL_DRIVE_ID = "177FdyYGWcPt6QXLOQH3sDXGwx6Un7_pY"
-url = f"https://drive.google.com/uc?id={MODEL_DRIVE_ID}"
-
-#  if model doesn't already exist
+# Download if model doesn't exist
 if not os.path.exists(MODEL_PATH):
     print("Downloading model from Google Drive...")
     gdown.download(url, MODEL_PATH, quiet=False, fuzzy=True)
 
-# Verify the model file is there
+# Check if file exists
 if not os.path.exists(MODEL_PATH):
-    raise FileNotFoundError(f"Model download failed for path: {MODEL_PATH}")
+    raise FileNotFoundError(f"Model download failed: {MODEL_PATH}")
 
 # Load the model
 model = load_model(MODEL_PATH)
 print("Model loaded successfully!")
+
+
 
 # Class labels
 class_labels = ['glioma', 'meningioma', 'notumor', 'pituitary']
